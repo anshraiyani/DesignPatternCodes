@@ -3,6 +3,7 @@ package com.ansh;
 import java.util.ArrayList;
 import java.util.List;
 
+// concrete class for mementos
 class FineMemento{
     private String type;
     private String date;
@@ -27,6 +28,7 @@ class FineMemento{
     }
 }
 
+//concrete class for all the info regarding fines
 class Fine{
     private String type;
     private String date;
