@@ -2,13 +2,9 @@ package com.ansh;
 
 import java.util.ArrayList;
 
-interface Iterator<VehicleInfo> { //blueprint for iterator
+interface Iterator { //blueprint for iterator
     boolean hasNext();
     Object next();
-}
-
-interface VehicleContainer<VehicleInfo> { //we can get iterators from here
-    Iterator<VehicleInfo> getIterator();
 }
 
 class VehicleInfo{ //we create an object of this type to store multiple info about a vehicle owner
@@ -35,7 +31,7 @@ class VehicleInfo{ //we create an object of this type to store multiple info abo
     }
 }
 
-class VehicleRespository implements VehicleContainer<VehicleInfo>{ //contains method to add vehicle info
+class VehicleRespository{ //contains method to add vehicle info
 
     private ArrayList<VehicleInfo> vehicles = new ArrayList<VehicleInfo>();
 
@@ -43,12 +39,11 @@ class VehicleRespository implements VehicleContainer<VehicleInfo>{ //contains me
         vehicles.add(vehicle);
     }
 
-    @Override
-    public Iterator<VehicleInfo> getIterator() {
+    public  Iterator getIterator() {
         return new VehicleIterator();
     }
 
-    private class VehicleIterator implements Iterator<VehicleInfo>{ //inner class which defines methods of iterator class
+    private class VehicleIterator implements Iterator{ //inner class which defines methods of iterator class
         int index;
 
         @Override
@@ -74,7 +69,7 @@ public class IteratorDesignPatternClient {
         v.addVehicle(new VehicleInfo("bike", "4567", "Ansh"));
         v.addVehicle(new VehicleInfo("car", "0123", "Rahul"));
 
-        Iterator<VehicleInfo> iter = v.getIterator();
+        Iterator iter = v.getIterator();
         while(iter.hasNext()){
             VehicleInfo vehicleInfo = (VehicleInfo) iter.next();
             System.out.println("Type: "+vehicleInfo.getType()+" Number Plate: "+vehicleInfo.getNumberPlate()+" Owner Name: "+vehicleInfo.getOwnerName());
